@@ -1,0 +1,80 @@
+openapi: 3.0.1
+info:
+  title: Rest Product
+  description: Rest Product
+  version: 1.0.0
+servers:
+- url: https://localhost:8080
+tags:
+- name: Product
+  description: Agrupamiento del Controller Product
+paths:
+  /product:
+    get:
+      tags:
+      - Product
+      summary: Permite retornar un listado de productos del banco
+      description: |
+        ### Acerca de la funcionalidad expuesta
+        Se puede enriquecer mas el servicio.
+      operationId: product
+      responses:
+        "200":
+          description: Se obtuvo el listado de productos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+    post:
+      tags:
+      - ProductPost
+      summary: Permite guardar los datos del producto
+      description: |
+        ### Acerca de la funcionalidad expuesta
+        Se puede enriquecer mas el servicio.
+      operationId: productPost
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+      responses:
+        "200":
+          description: Se guardo producto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+components:
+  schemas:
+    Products:
+      type: array
+      items:
+          properties:
+            category:
+              type: string
+              example: "Pasivos"
+            accountType:
+              type: string
+              example: "Cuenta Corriente"
+            description:
+              type: string
+              example: "Libre de comisión por mantenimiento y con un límite máximo de movimientos mensuales."
+    Product:
+      required:
+       - typeClient
+      properties:
+        category:
+          type: string
+          example: "Pasivos"
+        accountType:
+          type: string
+          example: "Cuenta Corriente"
+        description:
+          type: string
+          example: "Libre de comisión por mantenimiento y con un límite máximo de movimientos mensuales."
+    ProductResponse:
+      properties:
+        sucsess:
+          type: boolean
+          example: true
